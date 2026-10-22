@@ -26,5 +26,4 @@ def load_object(file_path: str | Path):
             return pickle.load(file)
 
     except (OSError, pickle.PickleError, TypeError, AttributeError) as exc:
-        raise RuntimeError(
-            f"Failed to save object to {file_path}") from exc
+        raise RuntimeError(f"Failed to save object to {file_path}") from exc
