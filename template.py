@@ -1,0 +1,1 @@
+lst = ['Apple', 'Banana', 'Orange']
