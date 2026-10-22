@@ -2,4 +2,3 @@ tests/unit/test_config.env
 config.env
 test.ipynb
 data
-diabetes.csv
