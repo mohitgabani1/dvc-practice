@@ -1,6 +1,7 @@
 from pathlib import Path
-from sklearn.model_selection import train_test_split
+
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 data_path = Path("data/raw/data.csv")
 train_data_path = Path("data/validation/train.csv")

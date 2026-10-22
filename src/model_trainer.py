@@ -1,8 +1,9 @@
-from sklearn.ensemble import RandomForestClassifier
-import yaml
-import pickle
 from pathlib import Path
+
 import pandas as pd
+import yaml
+from sklearn.ensemble import RandomForestClassifier
+
 from src.object_utils import save_object
 
 train_data_path = Path("data/validation/train.csv")
@@ -22,6 +23,7 @@ def trainer():
         max_depth=params['model parameter']['max_depth'],
         ccp_alpha=params['model parameter']['ccp_alpha']
     )
+
     rf.fit(x_train, y_train)
     save_object(model_path, rf)
 

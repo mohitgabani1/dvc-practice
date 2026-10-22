@@ -59,6 +59,9 @@ jobs:
           dvc remote modify --local azure_storage connection_string "$AZURE_STORAGE_CONNECTION_STRING"
           dvc remote add --local --force -d azure_storage "$DVC_REMOTE_URL"
 
+      - name: Push updated DVC artifacts
+        run: dvc push
+
       - name: Check code quality
         run: ruff check . # check code quality - linting
 

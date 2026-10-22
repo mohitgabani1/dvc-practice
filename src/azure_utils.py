@@ -1,6 +1,7 @@
+import os
+
 from azure.storage.blob import BlobServiceClient
 from dotenv import load_dotenv
-import os
 
 load_dotenv("configiration.env")
 
