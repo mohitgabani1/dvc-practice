@@ -36,6 +36,6 @@ stages:
           - model parameter.n_estimators
           - model parameter.criterion
           - model parameter.max_depth
-          - model parameter.ccp-alpha
+          - model parameter.ccp_alpha
     outs:
       - data/artifacts/model.pkl

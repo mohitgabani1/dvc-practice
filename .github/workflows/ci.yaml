@@ -56,9 +56,9 @@ jobs:
           DVC_REMOTE_URL: ${{ vars.DVC_REMOTE_URL }}
           AZURE_STORAGE_STRING: ${{ secrets.AZURE_STORAGE_STRING }}
         run: |
-          dvc remote modify --local azure_storage connection_string "$AZURE_STORAGE_STRING"
           dvc remote add --local --force -d azure_storage "$DVC_REMOTE_URL"
-
+          dvc remote modify --local azure_storage connection_string "$AZURE_STORAGE_STRING"
+          
       - name: Push updated DVC artifacts
         run: dvc push
 
