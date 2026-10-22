@@ -5,7 +5,7 @@ import pandas as pd
 
 def ingestion():
     df = pd.read_csv(
-        "/Volumes/Learning/Projects/ML Projects/Classification/Diabetes/diabetes_v1.csv"
+        "data/raw/data.csv"
     )
 
     raw_data_path = Path("data/raw/data.csv")
