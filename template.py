@@ -1,1 +1,1 @@
-lst = ['Apple', 'Banana', 'Orange']
+lst = ["Apple", "Banana", "Orange"]

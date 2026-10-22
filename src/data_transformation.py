@@ -11,12 +11,24 @@ train_data_path = Path("data/validation/train.csv")
 
 def transformation():
     train_data = pd.read_csv(train_data_path)
-    x_train = train_data.drop(columns=['Outcome'])
+    x_train = train_data.drop(columns=["Outcome"])
 
     ct = ColumnTransformer(
         transformers=[
-            ('scaler', StandardScaler(), ['Pregnancies', 'Glucose', 'BloodPressure',
-                                          'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age'])
+            (
+                "scaler",
+                StandardScaler(),
+                [
+                    "Pregnancies",
+                    "Glucose",
+                    "BloodPressure",
+                    "SkinThickness",
+                    "Insulin",
+                    "BMI",
+                    "DiabetesPedigreeFunction",
+                    "Age",
+                ],
+            )
         ]
     )
     ct.fit_transform(x_train)
@@ -25,5 +37,5 @@ def transformation():
     save_object(artifact_path, obj=ct)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     transformation()

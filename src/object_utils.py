@@ -13,6 +13,4 @@ def save_object(file_path: str | Path, obj: object) -> None:
         with open(file_path, "wb") as file:
             pickle.dump(obj, file)
     except (OSError, pickle.PickleError, TypeError, AttributeError) as exc:
-        raise RuntimeError(
-            f"Failed to save object to {file_path}"
-        ) from exc
+        raise RuntimeError(f"Failed to save object to {file_path}") from exc

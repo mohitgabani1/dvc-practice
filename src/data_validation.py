@@ -18,5 +18,5 @@ def validation():
     test.to_csv(test_data_path, index=False)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     validation()
