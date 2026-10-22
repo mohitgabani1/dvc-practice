@@ -20,13 +20,13 @@ concurrency: # when new run starts cancel old run
 
 jobs: # tasks GitHub action will execute
   test: # job identifier name
-    name: Test Python ${{ matrix.python-version }}. # job display name
+    name: Test Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false # if one matrix fails the other will get finished not stop
       matrix:
-        python-version: ["3.11", "3.12"]
+        python-version: ["3.12"]
 
     timeout-minutes: 15 # limits the job execution time
 
