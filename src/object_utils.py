@@ -14,3 +14,17 @@ def save_object(file_path: str | Path, obj: object) -> None:
             pickle.dump(obj, file)
     except (OSError, pickle.PickleError, TypeError, AttributeError) as exc:
         raise RuntimeError(f"Failed to save object to {file_path}") from exc
+
+
+def load_object(file_path: str | Path):
+    """Load a Python object from a file."""
+
+    file_path = Path(file_path)
+
+    try:
+        with open(file_path, "rb") as file:
+            return pickle.load(file)
+
+    except (OSError, pickle.PickleError, TypeError, AttributeError) as exc:
+        raise RuntimeError(
+            f"Failed to save object to {file_path}") from exc

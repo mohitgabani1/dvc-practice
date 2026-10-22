@@ -3,6 +3,7 @@ stages:
     cmd: python3 -m src.data_ingestion
     deps:
       - src/data_ingestion.py
+      - diabetes.csv
     outs:
       - data/raw/data.csv
 
@@ -21,7 +22,6 @@ stages:
       - src/data_validation.py
       - src/data_transformation.py
       - data/validation/train.csv
-      - data/validation/test.csv
     outs:
       - data/artifacts/preprocessed.pkl
 
