@@ -1,6 +1,6 @@
 name: Diamond Price CI-CD Pipeline
 
-on: # trigger when to start CI
+on:
   push:
     branches:
       - main
@@ -11,28 +11,28 @@ on: # trigger when to start CI
       - main
       - develop
 
-permissions: # CI will have read and test permission not change
+permissions:
   contents: read
 
-concurrency: # when new run starts cancel old run
+concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-jobs: # tasks GitHub action will execute
-  test: # job identifier name
+jobs:
+  test:
     name: Test Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
 
     strategy:
-      fail-fast: false # if one matrix fails the other will get finished not stop
+      fail-fast: false
       matrix:
         python-version: ["3.12"]
 
-    timeout-minutes: 15 # limits the job execution time
+    timeout-minutes: 15
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4. # check out repository so runner gets files
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
