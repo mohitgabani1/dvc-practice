@@ -8,7 +8,7 @@ test_data_path = Path("data/validation/test.csv")
 
 
 def validation():
-    df = pd.read_csv()
+    df = pd.read_csv(data_path)
     train, test = train_test_split(df, random_state=42, test_size=0.2)
     train_data_path.parent.mkdir(parents=True, exist_ok=True)
     test_data_path.parent.mkdir(parents=True, exist_ok=True)

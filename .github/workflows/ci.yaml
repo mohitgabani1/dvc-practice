@@ -1,8 +1,6 @@
 name: Diamond Price CI-CD Pipeline
 
-name: ML Project CI
-
-on:                          # trigger when to start CI
+on: # trigger when to start CI
   push:
     branches:
       - main
@@ -13,32 +11,32 @@ on:                          # trigger when to start CI
       - main
       - develop
 
-permissions:       # CI will have read and test permission not change
+permissions: # CI will have read and test permission not change
   contents: read
 
-concurrency:      # when new run starts cancel old run
+concurrency: # when new run starts cancel old run
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-jobs:                 # tasks GitHub action will execute
-  test:                # job identifier name
-    name: Test Python ${{ matrix.python-version }}.  # job display name
+jobs: # tasks GitHub action will execute
+  test: # job identifier name
+    name: Test Python ${{ matrix.python-version }}. # job display name
     runs-on: ubuntu-latest
 
     strategy:
-      fail-fast: false    # if one matrix fails the other will get finished not stop
+      fail-fast: false # if one matrix fails the other will get finished not stop
       matrix:
         python-version: ["3.11", "3.12"]
 
-    timeout-minutes: 15      # limits the job execution time
+    timeout-minutes: 15 # limits the job execution time
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.   # check out repository so runner gets files
+        uses: actions/checkout@v4. # check out repository so runner gets files
 
       - name: Set up Python
         uses: actions/setup-python@v5
-        with:               # supply configuration to action
+        with: # supply configuration to action
           python-version: ${{ matrix.python-version }}
           cache: pip
           cache-dependency-path: |
@@ -48,14 +46,25 @@ jobs:                 # tasks GitHub action will execute
         run: python -m pip install --upgrade pip
 
       - name: Install dependencies
-        run: python -m pip install -r requirements.txt
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install "dvc[azure]"
+
+      # 4. Configure Azure credentials for DVC
+      - name: Configure DVC Azure authentication
+        env:
+          DVC_REMOTE_URL: ${{ vars.DVC_REMOTE_URL }}
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_STRING }}
+        run: |
+          dvc remote modify --local azure_storage connection_string "$AZURE_STORAGE_CONNECTION_STRING"
+          dvc remote add --local --force -d azure_storage "$DVC_REMOTE_URL"
 
       - name: Check code quality
-        run: ruff check .       # check code quality - linting
+        run: ruff check . # check code quality - linting
 
       - name: Check code formatting
         run: ruff format --check .
 
-      - name: run unit tests.   # pytest automatically run pyproject.toml
-        run: python -m pytest tests/unit -v  # get address from pyproject.toml
+      - name: run unit tests. # pytest automatically run pyproject.toml
+        run: python -m pytest tests/unit -v # get address from pyproject.toml
 

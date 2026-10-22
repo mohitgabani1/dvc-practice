@@ -12,7 +12,7 @@ model_path.parent.mkdir(parents=True, exist_ok=True)
 
 def trainer():
     train_data = pd.read_csv(train_data_path)
-    x_train = train_data.drop(column=['Outcome'])
+    x_train = train_data.drop(columns=['Outcome'])
     y_train = train_data['Outcome']
     with open("params.yaml", 'r') as f:
         params = yaml.safe_load(f)

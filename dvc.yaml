@@ -1,30 +1,41 @@
 stages:
   data_ingestion:
-    cmd: python src/data_ingestion.py
+    cmd: python3 -m src.data_ingestion
     deps:
       - src/data_ingestion.py
     outs:
       - data/raw/data.csv
 
   data_validation:
-    cmd: python src/data_validation.py
+    cmd: python3 -m src.data_validation
     deps:
       - src/data_ingestion.py
+      - data/raw/data.csv
     outs:
       - data/validation/train.csv
       - data/validation/test.csv
 
   data_transformation:
-    cmd: python src/data_transformation.py
+    cmd: python3 -m src.data_transformation
     deps:
-      - data/raw/data_validation
+      - src/data_validation.py
+      - src/data_transformation.py
+      - data/validation/train.csv
+      - data/validation/test.csv
     outs:
       - data/artifacts/preprocessed.pkl
 
   model_training:
-    cmd: python src/model_trainer.py
+    cmd: python3 -m src.model_trainer
     deps:
-      - src/data_transformation.py
+      - src/model_trainer.py
       - data/validation/train.csv
+      - data/artifacts/preprocessed.pkl
+    params:
+      - params.yaml:
+          - model parameter.n_estimators
+          - model parameter.criterion
+          - model parameter.max_depth
+          - model parameter.ccp-alpha
     outs:
       - data/artifacts/model.pkl

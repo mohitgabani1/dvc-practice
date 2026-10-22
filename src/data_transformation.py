@@ -11,7 +11,7 @@ train_data_path = Path("data/validation/train.csv")
 
 def transformation():
     train_data = pd.read_csv(train_data_path)
-    x_train = train_data.drop(column=['Outcome'])
+    x_train = train_data.drop(columns=['Outcome'])
     y_train = train_data['Outcome']
 
     ct = ColumnTransformer(
