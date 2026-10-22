@@ -4,7 +4,7 @@ import pandas as pd
 import yaml
 from sklearn.ensemble import RandomForestClassifier
 
-from src.object_utils import save_object, load_object
+from src.object_utils import load_object, save_object
 
 train_data_path = Path("data/validation/train.csv")
 preprocessed_path = Path("data/artifacts/preprocessed.pkl")
