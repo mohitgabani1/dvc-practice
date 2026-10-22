@@ -3,14 +3,10 @@ stages:
   data_ingestion:
     cmd: python3 -m src.data_ingestion
     deps:
-    - path: diabetes.csv
-      hash: md5
-      md5: 954d54fe6480b8e4b88a311c3a611fba
-      size: 15531
     - path: src/data_ingestion.py
       hash: md5
-      md5: bf41bc94572d6907d92ec57e96f0cd61
-      size: 297
+      md5: 41d95fa7c802ffe1ae7d7f59c71c4d52
+      size: 372
     outs:
     - path: data/raw/data.csv
       hash: md5
@@ -25,8 +21,8 @@ stages:
       size: 15161
     - path: src/data_ingestion.py
       hash: md5
-      md5: bf41bc94572d6907d92ec57e96f0cd61
-      size: 297
+      md5: 41d95fa7c802ffe1ae7d7f59c71c4d52
+      size: 372
     outs:
     - path: data/validation/test.csv
       hash: md5
@@ -39,17 +35,21 @@ stages:
   data_transformation:
     cmd: python3 -m src.data_transformation
     deps:
+    - path: data/validation/test.csv
+      hash: md5
+      md5: a99a105c666fb74e8fa1cb09c8b88d86
+      size: 3087
     - path: data/validation/train.csv
       hash: md5
       md5: a4d1e0458c16f93dc2b9ed48e55002d0
       size: 12171
     - path: src/data_transformation.py
       hash: md5
-      md5: 4b1c47023df6a0c8bc0b2c8ead2c42e3
-      size: 1062
+      md5: 7c47ea2d52356cb9db6120e5f2ee7b3f
+      size: 862
     - path: src/data_validation.py
       hash: md5
-      md5: 01bcf0516b9833808387fbee3937d61f
+      md5: 40a71ef3f2d742b3c5a5982ca87971b6
       size: 625
     outs:
     - path: data/artifacts/preprocessed.pkl
@@ -69,8 +69,8 @@ stages:
       size: 12171
     - path: src/model_trainer.py
       hash: md5
-      md5: cc75ce33f0495bf9bac4c10dbca8cc4d
-      size: 1084
+      md5: 846e2fd5ecd0d91572dc1487b64b1221
+      size: 910
     params:
       params.yaml:
         model parameter.ccp_alpha: 0.2
@@ -80,5 +80,5 @@ stages:
     outs:
     - path: data/artifacts/model.pkl
       hash: md5
-      md5: 0a8650b44d73c0f3ab8b2e7c094f5075
-      size: 58219
+      md5: 9ffce1817afa75022b8642f23b7d45ba
+      size: 58409
