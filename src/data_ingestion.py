@@ -4,9 +4,7 @@ import pandas as pd
 
 
 def ingestion():
-    df = pd.read_csv(
-        "diabetes.csv"
-    )
+    df = pd.read_csv("diabetes.csv")
 
     raw_data_path = Path("data/raw/data.csv")
     raw_data_path.parent.mkdir(parents=True, exist_ok=True)
