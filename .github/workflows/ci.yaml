@@ -12,7 +12,7 @@ on:
       - develop
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
@@ -71,12 +71,14 @@ jobs:
       - name: Push updated DVC artifacts
         run: dvc push -v
 
-      - name: Commit updated DVC lock file
+      - name: Configure git
         run: |
-          git config user.name "mohitgabani1"
-          git config user.email "mohitgabani1@gmail.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add dvc.lock
+      - name: Add changes to Git
+        run: |
+          git add .
 
           if ! git diff --cached --quiet; then
             git commit -m "Update DVC pipeline metadata"
