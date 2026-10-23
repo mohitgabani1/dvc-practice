@@ -5,8 +5,8 @@ stages:
     deps:
     - path: diabetes.csv
       hash: md5
-      md5: b03f6bbeb5d1154febe1e26f97d6a6cf
-      size: 15161
+      md5: 7673f69c6812adf411029d1768b9e90f
+      size: 14022
     - path: src/data_ingestion.py
       hash: md5
       md5: bf41bc94572d6907d92ec57e96f0cd61
@@ -14,15 +14,15 @@ stages:
     outs:
     - path: data/raw/data.csv
       hash: md5
-      md5: b03f6bbeb5d1154febe1e26f97d6a6cf
-      size: 15161
+      md5: 7673f69c6812adf411029d1768b9e90f
+      size: 14022
   data_validation:
     cmd: python3 -m src.data_validation
     deps:
     - path: data/raw/data.csv
       hash: md5
-      md5: b03f6bbeb5d1154febe1e26f97d6a6cf
-      size: 15161
+      md5: 7673f69c6812adf411029d1768b9e90f
+      size: 14022
     - path: src/data_ingestion.py
       hash: md5
       md5: bf41bc94572d6907d92ec57e96f0cd61
@@ -30,19 +30,19 @@ stages:
     outs:
     - path: data/validation/test.csv
       hash: md5
-      md5: a99a105c666fb74e8fa1cb09c8b88d86
-      size: 3087
+      md5: 125337094397d06d500c981598e61e2a
+      size: 2879
     - path: data/validation/train.csv
       hash: md5
-      md5: a4d1e0458c16f93dc2b9ed48e55002d0
-      size: 12171
+      md5: 034137afa7bf270f751d69f0d1256894
+      size: 11240
   data_transformation:
     cmd: python3 -m src.data_transformation
     deps:
     - path: data/validation/train.csv
       hash: md5
-      md5: a4d1e0458c16f93dc2b9ed48e55002d0
-      size: 12171
+      md5: 034137afa7bf270f751d69f0d1256894
+      size: 11240
     - path: src/data_transformation.py
       hash: md5
       md5: 4b1c47023df6a0c8bc0b2c8ead2c42e3
@@ -54,22 +54,22 @@ stages:
     outs:
     - path: data/artifacts/preprocessed.pkl
       hash: md5
-      md5: e2cd178d1287b10593ccdd3212f9edbd
+      md5: 02544d774b815cf7ccf865d57c952aa1
       size: 1504
   model_training:
     cmd: python3 -m src.model_trainer
     deps:
     - path: data/artifacts/preprocessed.pkl
       hash: md5
-      md5: e2cd178d1287b10593ccdd3212f9edbd
+      md5: 02544d774b815cf7ccf865d57c952aa1
       size: 1504
     - path: data/validation/train.csv
       hash: md5
-      md5: a4d1e0458c16f93dc2b9ed48e55002d0
-      size: 12171
+      md5: 034137afa7bf270f751d69f0d1256894
+      size: 11240
     - path: src/model_trainer.py
       hash: md5
-      md5: cc75ce33f0495bf9bac4c10dbca8cc4d
+      md5: e0e372254ded03a93d74006ec9631534
       size: 1084
     params:
       params.yaml:
@@ -80,5 +80,5 @@ stages:
     outs:
     - path: data/artifacts/model.pkl
       hash: md5
-      md5: 5e9aeebbde49ed81210c8783a8ca6379
+      md5: 65f19a41b0c9e7bbf2dceba63cfea8d4
       size: 58219
