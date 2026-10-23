@@ -71,6 +71,20 @@ jobs:
       - name: Push updated DVC artifacts
         run: dvc push -v
 
+      - name: Commit updated DVC lock file
+        run: |
+          git config user.name "mohitgabani1"
+          git config user.email "mohitgabani1@gmail.com"
+
+          git add dvc.lock
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Update DVC pipeline metadata"
+            git push origin HEAD:main
+          else
+            echo "No changes to dvc.lock"
+          fi
+
       - name: Check code quality
         run: ruff check . # check code quality - linting
 
